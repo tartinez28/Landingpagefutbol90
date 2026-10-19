@@ -1,0 +1,802 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fútbol 90: noticias, resultados, análisis y pasión por el fútbol.">
+  <title>Fútbol 90 | Vive la pasión del fútbol</title>
+
+  <!-- GOOGLE TAG MANAGER: pega aquí el primer código cuando tengas tu ID -->
+
+  <style>
+    :root {
+      --green: #16a34a;
+      --dark: #101810;
+      --lime: #b7f56b;
+      --light: #f5f7f2;
+      --text: #263126;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: white;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    /* 1. HEADER */
+    header {
+      background: var(--dark);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      color: var(--lime);
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: var(--lime);
+    }
+
+    .btn {
+      display: inline-block;
+      border: 0;
+      cursor: pointer;
+      background: var(--green);
+      color: white;
+      padding: 13px 23px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      background: #12813b;
+      transform: translateY(-2px);
+    }
+
+    .btn-dark {
+      background: var(--dark);
+    }
+
+    /* 2. HERO */
+    .hero {
+      color: white;
+      min-height: 550px;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(8,18,10,.94), rgba(8,18,10,.45)),
+        url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+    }
+
+    .hero-content {
+      max-width: 690px;
+      padding: 90px 0;
+    }
+
+    .eyebrow {
+      color: var(--lime);
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 3px;
+      font-size: 13px;
+    }
+
+    h1 {
+      font-size: clamp(40px, 7vw, 72px);
+      line-height: 1.05;
+      margin: 20px 0;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 590px;
+      margin-bottom: 28px;
+      color: #edf3e9;
+    }
+
+    /* SECCIONES GENERALES */
+    section {
+      padding: 82px 0;
+      scroll-margin-top: 80px;
+    }
+
+    .section-heading {
+      max-width: 680px;
+      text-align: center;
+      margin: 0 auto 42px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(29px, 4vw, 42px);
+      line-height: 1.2;
+      color: var(--dark);
+      margin: 10px 0 14px;
+    }
+
+    .section-heading p {
+      color: #657065;
+    }
+
+    .tag {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* 3. BENEFICIOS */
+    .benefits {
+      background: var(--light);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      border: 1px solid #e7ece4;
+      box-shadow: 0 8px 24px rgba(0,0,0,.04);
+    }
+
+    .card .emoji {
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      color: var(--dark);
+      margin-bottom: 10px;
+      font-size: 21px;
+    }
+
+    .card p {
+      color: #657065;
+    }
+
+    /* 4. CTA */
+    .cta {
+      background: var(--green);
+      color: white;
+      text-align: center;
+      padding: 54px 0;
+    }
+
+    .cta h2 {
+      font-size: clamp(27px, 4vw, 39px);
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      margin-bottom: 23px;
+    }
+
+    .cta .btn {
+      background: white;
+      color: #166534;
+    }
+
+    /* 5. EXPLICACIÓN */
+    .explanation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .explanation-grid h2 {
+      font-size: 38px;
+      line-height: 1.2;
+      color: var(--dark);
+      margin: 12px 0 20px;
+    }
+
+    .explanation-grid p {
+      color: #657065;
+      margin-bottom: 20px;
+    }
+
+    .football-image {
+      min-height: 340px;
+      border-radius: 18px;
+      background:
+        url("https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1000&q=85")
+        center/cover;
+    }
+
+    .steps {
+      display: grid;
+      gap: 13px;
+      margin: 24px 0;
+    }
+
+    .step {
+      padding: 12px 15px;
+      background: var(--light);
+      border-radius: 8px;
+    }
+
+    /* 6. TESTIMONIOS */
+    .testimonials {
+      background: var(--light);
+    }
+
+    .quote {
+      font-size: 17px;
+      margin-bottom: 20px;
+    }
+
+    .person {
+      font-weight: bold;
+      color: var(--green);
+    }
+
+    /* 7. CTA 2 */
+    .cta-secondary {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+    }
+
+    .cta-secondary h2 {
+      font-size: clamp(30px, 5vw, 46px);
+      margin-bottom: 14px;
+    }
+
+    .cta-secondary p {
+      color: #d1ddcf;
+      margin-bottom: 24px;
+    }
+
+    /* 8. FAQ */
+    .faq-list {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    details {
+      border-bottom: 1px solid #e0e6de;
+      padding: 20px 5px;
+    }
+
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    details p {
+      color: #657065;
+      padding-top: 12px;
+    }
+
+    /* 9. PRE-FOOTER */
+    .prefooter {
+      background: #eaf6e5;
+      text-align: center;
+    }
+
+    .prefooter h2 {
+      font-size: 32px;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .prefooter p {
+      margin-bottom: 22px;
+    }
+
+    /* FORMULARIO DEMO: después se conectará a HubSpot */
+    .signup {
+      max-width: 560px;
+      margin: 28px auto 0;
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      text-align: left;
+      box-shadow: 0 8px 24px rgba(0,0,0,.05);
+    }
+
+    .signup label {
+      display: block;
+      margin: 12px 0 5px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .signup input,
+    .signup select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccd5c9;
+      border-radius: 7px;
+      background: white;
+    }
+
+    .signup .btn {
+      width: 100%;
+      margin-top: 18px;
+    }
+
+    .form-message {
+      margin-top: 12px;
+      color: #166534;
+      font-weight: bold;
+    }
+
+    /* 10. FOOTER */
+    footer {
+      background: var(--dark);
+      color: #c8d2c5;
+      padding: 32px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: var(--lime);
+    }
+
+    /* AVISO DE COOKIES */
+    .cookie-banner {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      max-width: 620px;
+      margin: auto;
+      background: white;
+      border: 1px solid #dce4d8;
+      box-shadow: 0 8px 35px #0002;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .cookie-banner p {
+      margin-bottom: 12px;
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-actions button {
+      padding: 9px 15px;
+      border-radius: 7px;
+      border: 1px solid #ccd5c9;
+      cursor: pointer;
+    }
+
+    .cookie-actions .accept {
+      background: var(--green);
+      color: white;
+      border-color: var(--green);
+    }
+
+    @media (max-width: 760px) {
+      .navbar {
+        padding: 15px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      nav a {
+        font-size: 13px;
+      }
+
+      .navbar > .btn {
+        display: none;
+      }
+
+      .hero {
+        min-height: 480px;
+        background-position: center;
+      }
+
+      .hero-content {
+        padding: 65px 0;
+      }
+
+      .cards,
+      .explanation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 62px 0;
+      }
+
+      .football-image {
+        min-height: 250px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- GOOGLE TAG MANAGER: pega aquí el segundo código, justo después de abrir body -->
+
+  <!-- 1. HEADER -->
+  <header>
+    <div class="container navbar">
+      <a href="#inicio" class="logo">FÚTBOL<span>90</span></a>
+
+      <nav aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#testimonios">Opiniones</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <a href="#registro" class="btn" id="header-cta">Unirme ahora</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. HERO -->
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <span class="eyebrow">La pasión nunca termina</span>
+          <h1>El fútbol se vive. La pasión se comparte.</h1>
+          <p>
+            Noticias, análisis, historias y toda la emoción del deporte
+            que nos une. Únete a la comunidad de Fútbol 90.
+          </p>
+          <a href="#registro" class="btn" id="hero-cta">
+            Quiero ser parte
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. BENEFICIOS -->
+    <section class="benefits" id="beneficios">
+      <div class="container">
+        <div class="section-heading">
+          <span class="tag">¿Por qué Fútbol 90?</span>
+          <h2>Todo el fútbol en un solo lugar</h2>
+          <p>Un espacio para quienes sienten el fútbol dentro y fuera de la cancha.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="emoji">⚽</div>
+            <h3>Pasión por el juego</h3>
+            <p>Disfruta historias, curiosidades y contenido para verdaderos aficionados.</p>
+          </article>
+
+          <article class="card">
+            <div class="emoji">📊</div>
+            <h3>Análisis y actualidad</h3>
+            <p>Descubre estadísticas, análisis de partidos y conversaciones deportivas.</p>
+          </article>
+
+          <article class="card">
+            <div class="emoji">🤝</div>
+            <h3>Una gran comunidad</h3>
+            <p>Comparte tu opinión y conecta con personas que aman el mismo deporte.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CTA -->
+    <section class="cta">
+      <div class="container">
+        <h2>¿El fútbol es parte de tu vida?</h2>
+        <p>Da el siguiente paso y únete a nuestra comunidad.</p>
+        <a href="#registro" class="btn" id="cta-beneficios">Quiero participar</a>
+      </div>
+    </section>
+
+    <!-- 5. EXPLICACIÓN -->
+    <section id="nosotros">
+      <div class="container explanation-grid">
+        <div>
+          <span class="tag">Nuestra comunidad</span>
+          <h2>Más que un deporte, una forma de vivir</h2>
+          <p>
+            Fútbol 90 nace para reunir a los aficionados en un espacio
+            dedicado a la pasión por el fútbol, sus protagonistas y sus historias.
+          </p>
+
+          <div class="steps">
+            <div class="step">⚡ <strong>Descubre:</strong> explora contenido futbolero.</div>
+            <div class="step">🗣️ <strong>Participa:</strong> comparte lo que piensas.</div>
+            <div class="step">💚 <strong>Conecta:</strong> forma parte de la comunidad.</div>
+          </div>
+
+          <a href="#registro" class="btn" id="explanation-cta">Conocer más</a>
+        </div>
+
+        <div class="football-image" role="img"
+             aria-label="Cancha de fútbol"></div>
+      </div>
+    </section>
+
+    <!-- 6. TESTIMONIOS -->
+    <section class="testimonials" id="testimonios">
+      <div class="container">
+        <div class="section-heading">
+          <span class="tag">La voz de los aficionados</span>
+          <h2>El fútbol nos une</h2>
+          <p>Un lugar para compartir la emoción de cada partido.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <p class="quote">
+              “Me encanta tener un espacio para hablar de fútbol y descubrir
+              nuevas historias del deporte.”
+            </p>
+            <p class="person">— Aficionado al fútbol</p>
+          </article>
+
+          <article class="card">
+            <p class="quote">
+              “El fútbol siempre genera conversaciones y buenos momentos
+              con otras personas.”
+            </p>
+            <p class="person">— Miembro de la comunidad</p>
+          </article>
+
+          <article class="card">
+            <p class="quote">
+              “Quiero seguir conectado con todo lo que pasa alrededor
+              del deporte que me apasiona.”
+            </p>
+            <p class="person">— Fanático del deporte</p>
+          </article>
+        </div>
+        <p style="text-align:center;margin-top:20px;color:#657065;font-size:12px">
+          Testimonios ilustrativos de diseño; reemplázalos por opiniones reales antes de presentar resultados.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. CTA 2 -->
+    <section class="cta-secondary">
+      <div class="container">
+        <span class="eyebrow">Tu lugar está aquí</span>
+        <h2>La próxima gran historia también puede ser la tuya</h2>
+        <p>Regístrate y mantente conectado con la pasión del fútbol.</p>
+        <a href="#registro" class="btn" id="cta-final">Registrarme gratis</a>
+      </div>
+    </section>
+
+    <!-- 8. FAQ -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-heading">
+          <span class="tag">Resolvemos tus dudas</span>
+          <h2>Preguntas frecuentes</h2>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>¿Qué es Fútbol 90?</summary>
+            <p>Es una propuesta de comunidad digital dedicada a los aficionados al fútbol.</p>
+          </details>
+
+          <details>
+            <summary>¿Cómo puedo unirme?</summary>
+            <p>Completa el formulario de registro con tu nombre y correo electrónico.</p>
+          </details>
+
+          <details>
+            <summary>¿Tiene algún costo registrarse?</summary>
+            <p>El registro de esta landing page es gratuito.</p>
+          </details>
+
+          <details>
+            <summary>¿Qué recibiré al registrarme?</summary>
+            <p>La propuesta es compartir novedades y contenido relacionado con el fútbol. La comunicación por correo deberá configurarse por separado.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. PRE-FOOTER -->
+    <section class="prefooter" id="registro">
+      <div class="container">
+        <span class="tag">Únete hoy</span>
+        <h2>¿Listo para vivir el fútbol con nosotros?</h2>
+        <p>Déjanos tus datos para formar parte de la comunidad.</p>
+
+        <!-- Este formulario es una DEMOSTRACIÓN.
+             Más adelante lo reemplazaremos por el formulario de HubSpot. -->
+        <form class="signup" id="registro-form">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre"
+                 placeholder="Escribe tu nombre" required>
+
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo"
+                 placeholder="nombre@correo.com" required>
+
+          <label for="interes">¿Qué te interesa más?</label>
+          <select id="interes" name="interes" required>
+            <option value="">Selecciona una opción</option>
+            <option value="noticias">Noticias de fútbol</option>
+            <option value="analisis">Análisis de partidos</option>
+            <option value="comunidad">Comunidad futbolera</option>
+          </select>
+
+          <label style="font-weight:normal">
+            <input type="checkbox" id="consentimiento" required
+                   style="width:auto">
+            Acepto el tratamiento de mis datos para esta actividad académica.
+          </label>
+
+          <button type="submit" class="btn" id="registro-cta">
+            Enviar mi registro
+          </button>
+
+          <p class="form-message" id="form-message" role="status"></p>
+          <p style="font-size:12px;color:#657065;margin-top:10px">
+            Demo académica: este formulario no guarda ni envía tus datos a un CRM.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. FOOTER -->
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <a href="#inicio" class="logo">FÚTBOL<span>90</span></a>
+        <p>La pasión que nos une.</p>
+      </div>
+      <p>© <span id="year"></span> Fútbol 90. Proyecto académico.</p>
+      <a href="#inicio">Volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <!-- AVISO DEMOSTRATIVO DE COOKIES -->
+  <div class="cookie-banner" id="cookie-banner">
+    <strong>Tu privacidad importa</strong>
+    <p>
+      Esta página académica podrá utilizar herramientas de medición.
+      La gestión real del consentimiento deberá configurarse antes de activar
+      herramientas de seguimiento.
+    </p>
+    <div class="cookie-actions">
+      <button class="accept" id="accept-cookies">Aceptar</button>
+      <button id="close-cookies">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    // Año del footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Formulario de demostración: no envía datos a HubSpot
+    document.getElementById("registro-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      document.getElementById("form-message").textContent =
+        "¡Prueba realizada! El formulario funciona visualmente. Falta conectarlo a HubSpot.";
+
+      // Evento de demostración para pruebas posteriores con GTM
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "demo_form_submit",
+        form_name: "registro_futbol90"
+      });
+    });
+
+    // Eventos de clic preparados para la configuración de GTM
+    document.querySelectorAll(
+      "#header-cta, #hero-cta, #cta-beneficios, #explanation-cta, #cta-final"
+    ).forEach(function(button) {
+      button.addEventListener("click", function() {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "demo_cta_click",
+          cta_id: button.id,
+          cta_text: button.textContent.trim()
+        });
+      });
+    });
+
+    // Encuesta de cookies solo demostrativa.
+    // No sustituye una plataforma real de consentimiento.
+    const cookieBanner = document.getElementById("cookie-banner");
+
+    if (!sessionStorage.getItem("futbol90-cookie-choice")) {
+      cookieBanner.style.display = "block";
+    }
+
+    document.getElementById("accept-cookies").addEventListener("click", function() {
+      sessionStorage.setItem("futbol90-cookie-choice", "accepted");
+      cookieBanner.style.display = "none";
+    });
+
+    document.getElementById("close-cookies").addEventListener("click", function() {
+      sessionStorage.setItem("futbol90-cookie-choice", "closed");
+      cookieBanner.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
