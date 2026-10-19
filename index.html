@@ -330,31 +330,10 @@
       box-shadow: 0 8px 24px rgba(0,0,0,.05);
     }
 
-    .signup label {
-      display: block;
-      margin: 12px 0 5px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .signup input,
-    .signup select {
+    /* Estilos para el formulario de HubSpot */
+    .hs-form-frame {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #ccd5c9;
-      border-radius: 7px;
-      background: white;
-    }
-
-    .signup .btn {
-      width: 100%;
-      margin-top: 18px;
-    }
-
-    .form-message {
-      margin-top: 12px;
-      color: #166534;
-      font-weight: bold;
+      min-height: 200px;
     }
 
     /* 10. FOOTER */
@@ -644,39 +623,16 @@
         <h2>¿Listo para vivir el fútbol con nosotros?</h2>
         <p>Déjanos tus datos para formar parte de la comunidad.</p>
 
-        <!-- Formulario de demostración: pendiente de conectar con HubSpot -->
-        <form class="signup" id="registro-form">
-          <label for="nombre">Nombre completo</label>
-          <input type="text" id="nombre" name="nombre"
-            placeholder="Escribe tu nombre" required>
-
-          <label for="correo">Correo electrónico</label>
-          <input type="email" id="correo" name="correo"
-            placeholder="nombre@correo.com" required>
-
-          <label for="interes">¿Qué te interesa más?</label>
-          <select id="interes" name="interes" required>
-            <option value="">Selecciona una opción</option>
-            <option value="noticias">Noticias de fútbol</option>
-            <option value="analisis">Análisis de partidos</option>
-            <option value="comunidad">Comunidad futbolera</option>
-          </select>
-
-          <label style="font-weight:normal">
-            <input type="checkbox" id="consentimiento" required style="width:auto">
-            Acepto el tratamiento de mis datos para esta actividad académica.
-          </label>
-
-          <button type="submit" class="btn" id="registro-cta">
-            Enviar mi registro
-          </button>
-
-          <p class="form-message" id="form-message" role="status"></p>
-
-          <p style="font-size:12px;color:#657065;margin-top:10px">
-            Demo académica: este formulario no guarda ni envía tus datos a un CRM.
-          </p>
-        </form>
+        <!-- Formulario real de HubSpot -->
+        <div class="signup">
+          <script src="https://js.hsforms.net/forms/embed/52186808.js" defer></script>
+          <div
+            class="hs-form-frame"
+            data-region="na1"
+            data-form-id="90c38c62-2c74-428d-8b74-c6232a370bec"
+            data-portal-id="52186808">
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -710,20 +666,6 @@
   <script>
     // Año del footer
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Formulario de demostración: todavía no envía datos a HubSpot
-    document.getElementById("registro-form").addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      document.getElementById("form-message").textContent =
-        "¡Prueba realizada! El formulario funciona visualmente. Falta conectarlo a HubSpot.";
-
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "demo_form_submit",
-        form_name: "registro_futbol90"
-      });
-    });
 
     // Eventos de clic preparados para configurar en Google Tag Manager
     document.querySelectorAll(
